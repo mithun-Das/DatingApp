@@ -66,7 +66,17 @@ namespace DatingApp.API
                               .AllowAnyHeader()
                         );
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                    name : "sap-fallback",
+                    defaults : new {
+                        controller = "Fallback",
+                        action = "Index"
+                    }
+                );
+            });
         }
     }
 }
